@@ -1,0 +1,640 @@
+* {
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: Lato;
+    src: url(../fonts/lato-regular.woff);
+}
+
+@media (max-width: 600px) {
+    nav, article {
+        width: 100%;
+        height: auto;
+    }
+}
+
+/* Style the header */
+
+header {
+    background-color: #393E46;
+    /*text-align: center; */
+    color: white;
+    width: 100%;
+    height: 120px;
+    overflow: hidden;
+    padding: 20px 200px;
+}
+
+.header_title {
+    float: left;
+    width: 40%;
+}
+
+.header_title a{
+    color: white;
+    text-decoration: none;
+}
+
+.nav_bar {
+    float: left;
+    width: 60%;
+    height: 100%;
+    font-size: 15px;
+    text-align: right;
+    padding: 30px;
+    /*width: calc(50% - 60px);*/
+}
+
+.nav_bar a{
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+}
+
+.nav_bar a:hover{
+    color: black;
+    background-color: white;
+}
+
+body {
+    font-family: Lato, Arial, Helvetica, sans-serif;
+    margin: 0px;
+    background-color: #141414;
+}
+
+.sidebar {
+    float: left;
+    width: 20%;
+    background: #393E46;
+    color: white;
+    margin: 20px 0px 20px 10%;
+    padding: 20px;
+    min-height: 700px;
+    border: 2px solid #61646D;
+}
+
+content {
+    float: left;
+    padding: 20px;
+    margin: 20px;
+    width: calc(60%);
+    background-color: #393E46;
+    color: white;
+    min-height: 500px;
+    border: 2px solid #61646D;
+}
+
+section::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.character {
+    width: 100%;
+    padding: 50px 0;
+    text-align: center;
+    background-color: darkslategray;
+    border: 2px solid white;
+    display: table;
+}
+
+.character_name {
+    font-size: 25px;
+}
+
+.character_activity {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.character_health {
+    background-color: #242424;
+    width: 100%;
+    padding: 15px;
+    border: 2px solid white;
+    border-top: none;
+    margin-bottom: 10px;
+}
+
+.mainTab{
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+.mainTab button{
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+.mainTab button:hover{
+    background-color: #ddd;
+}
+
+.mainTab button.active{
+    font-weight: bold;
+    background-color: #2dabf9;
+    color: white;
+}
+
+.mainTabContent {
+    background-color: #242424;
+    min-height: 400px;
+    display: none;
+    border: 1px solid white;
+    padding: 15px;
+    animation: fadeEffect 1s;
+}
+
+@keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+.floor {
+    width: 100%;
+    padding: 50px;
+    text-align: center;
+    background-image: url("../img/surface_floor_bg.jpg");
+    background-size: 600px;
+    border: 2px solid white;
+}
+
+.floorexpBar {
+    width: 100%;
+    height: 25px;
+    background-color: white;
+    padding: 1px;
+    position: relative;
+}
+
+.floorexpBarInner {
+    width: 50.23%;
+    height: 100%;
+    background-color: green;
+}
+
+.floorexpBarText{
+    width: 100%;
+    color: black;
+    text-align: center;
+    position: absolute;
+    padding: 3px;
+    margin: auto;
+}
+
+.gatherBar {
+    width: 100%;
+    height: 25px;
+    background-color: white;
+    padding: 1px;
+    position: relative;
+}
+
+.gatherBarInner {
+    width: 50.23%;
+    height: 100%;
+    background-color: green;
+}
+
+.gatherBarText{
+    width: 100%;
+    color: black;
+    text-align: center;
+    position: absolute;
+    padding: 3px;
+    margin: auto;
+}
+
+.enemyBar {
+    width: 100%;
+    height: 25px;
+    background-color: white;
+    padding: 1px;
+    position: relative;
+}
+
+.enemyBarInner {
+    width: 50.23%;
+    height: 100%;
+    background-color: #7e0000;
+}
+
+.enemyBarText{
+    width: 100%;
+    color: black;
+    text-align: center;
+    position: absolute;
+    padding: 3px;
+    margin: auto;
+}
+
+.bossBar {
+    width: 100%;
+    height: 25px;
+    background-color: white;
+    padding: 1px;
+    position: relative;
+}
+
+.bossBarInner {
+    width: 50.23%;
+    height: 100%;
+    background-color: black;
+}
+
+.bossBarText{
+    width: 100%;
+    color: #7e0000;
+    font-weight: bold;
+    text-align: center;
+    position: absolute;
+    padding: 3px;
+    margin: auto;
+}
+
+.button_blue {
+	box-shadow:inset 0px -3px 7px 0px #29bbff;
+	background:linear-gradient(to bottom, #2dabf9 5%, #0688fa 100%);
+	background-color:#2dabf9;
+	border-radius:3px;
+	border:1px solid #0b0e07;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	padding:9px 23px;
+	text-decoration: none;
+	text-shadow:0px 1px 0px #263666;
+}
+
+.button_blue:hover {
+	background:linear-gradient(to bottom, #0688fa 5%, #2dabf9 100%);
+	background-color:#0688fa;
+}
+
+.button_blue:active {
+	position:relative;
+	top:1px;
+}
+
+.button_red {
+	box-shadow:inset 0px -3px 7px 0px #a70000;
+	background:linear-gradient(to bottom, #c70000 5%, #960000 100%);
+	background-color:#c70000;
+	border-radius:3px;
+	border:1px solid #0b0e07;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	padding:9px 23px;
+	text-decoration: none;
+	text-shadow:0px 1px 0px #263666;
+}
+
+.button_red:hover {
+	background:linear-gradient(to bottom, #960000 5%, #c70000 100%);
+	background-color:#960000;
+}
+
+.button_red:active {
+	position:relative;
+	top:1px;
+}
+
+.button_perks {
+	box-shadow:inset 0px -3px 7px 0px #29bbff;
+	background:linear-gradient(to bottom, #2dabf9 5%, #0688fa 100%);
+	background-color:#2dabf9;
+	border-radius:3px;
+	border:1px solid #0b0e07;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	padding:5px 15px;
+	text-decoration: none;
+	text-shadow:0px 1px 0px #263666;
+}
+
+.button_perks:hover {
+	background:linear-gradient(to bottom, #0688fa 5%, #2dabf9 100%);
+	background-color:#0688fa;
+}
+
+.button_perks:active {
+	position:relative;
+	top:1px;
+}
+
+.btnRevive {
+	box-shadow:inset 0px -3px 7px 0px #29bbff;
+	background:linear-gradient(to bottom, #2dabf9 5%, #0688fa 100%);
+	background-color:#2dabf9;
+	border-radius:3px;
+	border:1px solid #0b0e07;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	padding:9px 23px;
+	text-decoration: none;
+	text-shadow:0px 1px 0px #263666;
+}
+
+.btnRevive:hover {
+	background:linear-gradient(to bottom, #0688fa 5%, #2dabf9 100%);
+	background-color:#0688fa;
+}
+
+.btnRevive:active {
+	position:relative;
+	top:1px;
+}
+
+.floater {
+    float: left;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.floater_content{
+    float:left;
+    width: calc(24%);
+    height: 320px;
+    margin: 5px;
+    padding: 20px;
+    display: table;
+    text-align: center;
+    background-color: #242424;
+    border: 2px solid white;
+}
+
+.floater_cell{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.node_main_challenge{
+    float:left;
+    width: calc(24%);
+    height: 320px;
+    margin: 5px;
+    padding: 20px;
+    display: table;
+    text-align: center;
+    background-color: #7e0000;
+    border: 2px solid white;
+}
+
+.healthRow {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.healthTextCell {
+    width: 100px;
+}
+
+.healthBarCell {
+    width: 100%;
+}
+
+.healthBar {
+    width: 100%;
+    height: 25px;
+    background-color: white;
+    padding: 1px;
+    position: relative;
+}
+
+.healthBarInner {
+    width: 75%;
+    height: 100%;
+    background-color: green;
+}
+
+.healthBarText{
+    width: 100%;
+    color: black;
+    text-align: center;
+    position: absolute;
+    padding: 3px;
+    margin: auto;
+}
+
+.manaRow {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.manaTextCell {
+    width: 100px;
+}
+
+.manaBarCell {
+    width: 100%;
+}
+
+.manaBar {
+    width: 100%;
+    height: 25px;
+    background-color: white;
+    padding: 1px;
+    position: relative;
+}
+
+.manaBarInner {
+    width: 75%;
+    height: 100%;
+    background-color: rgb(1, 134, 223);
+}
+
+.manaBarText {
+    width: 100%;
+    color: black;
+    text-align: center;
+    position: absolute;
+    padding: 3px;
+    margin: auto;
+}
+
+.skillsContainer{
+    display: flex;
+    justify-content: center;
+}
+
+.skillsInner {
+    display: flex;
+    width: 48%;
+    height: 50px;
+    margin: 2px;
+    border: 1px solid white;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.skillsToolTip {
+    visibility: hidden;
+    width: 200px;
+    margin-top: 50px;
+    background-color: black;
+    color: #fff;
+    font-size: 15px;
+    text-align: center;
+    padding: 10px;
+    position: absolute;
+    z-index: 1;
+}
+
+.skillsInner:hover .skillsToolTip {
+    visibility: visible;
+}
+
+.skillsText {
+    font-size: 14px;
+}
+
+.skillsLevel {
+    font-size: 18px;
+}
+
+.weaponContainer{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.weaponIcon {
+    width: 50px;
+    height: 50px;
+    border: 1px solid white;
+    margin: 2px;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.artifactContainer{
+    display: flex;
+    justify-content: center;
+}
+
+.artifactInner {
+    display: flex;
+    height: 100%;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.artifactText {
+    font-size: 14px;
+}
+
+.artifactIcon {
+    width: 50px;
+    height: 50px;
+    border: 1px solid white;
+    margin: 2px;
+}
+
+.inventoryContainer{
+    display: grid;
+    grid-template-columns: 50px 50px 50px 50px 50px;
+    gap: 10px;
+    justify-content: center;
+}
+
+.inventoryIcon {
+    width: 50px;
+    height: 50px;
+    border: 1px solid white;
+    text-shadow: 2px 2px 2px #000000;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.inventoryToolTip {
+    visibility: hidden;
+    width: 200px;
+    margin-top: 50px;
+    background-color: black;
+    color: #fff;
+    font-size: 15px;
+    text-align: center;
+    padding: 10px;
+    position: absolute;
+    z-index: 1;
+}
+
+.inventoryIcon:hover .inventoryToolTip {
+    visibility: visible;
+}
+
+.logs {
+    overflow: scroll;
+    height: 200px;
+    font-size: 15px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid white;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.7); 
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%; 
+    height: 400px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+footer {
+    background-color: #393E46;
+    padding: 10px;
+    text-align: center;
+    color: white;
+}
