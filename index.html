@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Idle Ruins</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+	</head>
+	<body>
+		<header>
+			<div class="header_title">
+				<a href="/IdleRPG/"><image src="img/icon300_75.png" width="300px" height="75px"></image></a>
+			</div>
+			<div class="nav_bar">
+				<a href="javascript:showSettings();">Settings</a>
+				<a href="javascript:showUpdates();">Updates</a>
+				<a href="javascript:showAbout();">About</a>
+			</div>
+		</header>
+		<section>
+			<div class="sidebar">
+				<div id="characterBanner" class="character">
+					<div class="floater_cell">
+						<div id="characterActivity" class="character_activity">Idle</div>
+						<div id="perks"></div>
+						<button id="btnRevive" class="btnRevive" onclick="revive()">Revive</button>
+					</div>
+				</div>
+				<div class="character_health">
+					<div class="healthRow">
+						<div class="healthTextCell">Health</div>
+						<div class="healthBarCell">
+							<div class="healthBar" id="healthBar"><div class="healthBarText" id="healthBarText"></div><div class="healthBarInner" id="healthBarInner"></div></div>
+						</div>
+					</div>
+					<div class="manaRow">
+						<div class="manaTextCell">Mana</div>
+						<div class="manaBarCell">
+							<div class="manaBar" id="manaBar"><div class="manaBarText" id="manaBarText"></div><div class="manaBarInner" id="manaBarInner"></div></div>
+						</div>
+					</div>
+				</div>
+				<div class="mainTab" id="mainTabs">
+					<button class="mainTabButton" id="mainTabButtonSkills" onclick="openMainTab(event, 'mainTabSkills')">Skills</button>
+					<button class="mainTabButton" id="mainTabButtonEquipment" onclick="openMainTab(event, 'mainTabEquipment')">Equipment</button>
+					<button class="mainTabButton" id="mainTabButtonInventory" onclick="openMainTab(event, 'mainTabInventory')">Inventory</button>
+					<button class="mainTabButton" id="mainTabButtonLogs" onclick="openMainTab(event, 'mainTabLogs')">Logs</button>
+				</div>
+				<div class="mainTabContent" id="mainTabSkills">
+					<h4>Base Stats</h4>
+					<p id="baseStatsAttack">Attack: 0</p>
+					<p id="baseStatsDefense">Defense: 0</p>
+					<h4>Skills</h4>
+					<div class="skillsContainer">
+						<div class="skillsInner">
+							<div class="skillsIcon">
+								<image src="img/melee.png" width="25px" height="25px"></image>
+							</div>
+							<div class="skillsText">
+								<span>Melee</span>
+							</div>
+							<div class="skillsLevel">
+								<span id="meleeLevel">1</span>
+							</div>
+							<span class='skillsToolTip'><b>Melee</b><br><br>Level <span id="meleeLevelToolTip">1</span> (<span id="meleeXP">0</span>XP / <span id="meleeNextXP">0</span>XP)</span>
+						</div>
+						<div class="skillsInner">
+							<div class="skillsIcon">
+								<image src="img/gathering.png" width="25px" height="25px"></image>
+							</div>
+							<div class="skillsText">
+								<span>Gathering</span>
+							</div>
+							<div class="skillsLevel">
+								<span id="gatheringLevel">1</span>
+							</div>
+							<span class='skillsToolTip'><b>Gathering</b><br><br>Level <span id="gatheringLevelToolTip">1</span> (<span id="gatheringXP">0</span>XP / <span id="gatheringNextXP">0</span>XP)</span>
+						</div>
+					</div>
+				</div>
+				<div class="mainTabContent" id="mainTabEquipment">
+					<h4>Weapon</h4>
+					<div class="weaponContainer">
+						<div id="weapon" class="weaponIcon" onclick="removeWeapon()">
+							<image src="img/diamond.png" width="25px" height="25px"></image>
+						</div>
+					</div>
+					<h4>Artifact</h4>
+					<div class="artifactContainer">
+						<div class="artifactInner">
+							<div class="artifactIcon" id="artifact1" onclick="removeArtifact(1)">
+								<image src="img/diamond.png" width="25px" height="25px"></image>
+							</div>
+							<div class="artifactIcon" id="artifact2" onclick="removeArtifact(2)">
+								<image src="img/diamond.png" width="25px" height="25px"></image>
+							</div>
+							<div class="artifactIcon" id="artifact3" onclick="removeArtifact(3)">
+								<image src="img/diamond.png" width="25px" height="25px"></image>
+							</div>
+							<div class="artifactIcon" id="artifact4" onclick="removeArtifact(4)">
+								<image src="img/diamond.png" width="25px" height="25px"></image>
+							</div>
+							<div class="artifactIcon" id="artifact5" onclick="removeArtifact(5)">
+								<image src="img/diamond.png" width="25px" height="25px"></image>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="mainTabContent" id="mainTabInventory">
+					<h4>Inventory</h4>
+					<div id="inventoryContainer" class="inventoryContainer">
+						
+					</div>
+				</div>
+				<div class="mainTabContent" id="mainTabLogs">
+					<h4>Logs</h4>
+					<div class="logs" id="logs">
+						Welcome to Idle Ruins v0.1!
+					</div>
+					<button class="button_blue" onclick="">Clear Logs</button>
+				</div>
+			</div>
+			<content id="content">
+				<div id="switchFloor">
+					<div class="floater">
+						<div class="floater_content" id="switchFloor1">
+							<div class="floater_cell">
+								<image src="img/diamond.png" width="75px" height="75px"></image>
+								<h4>Floor 1</h4>
+								<button class="button_blue" onclick="switchFloor(1)">Enter</button>
+							</div>
+						</div>
+						<div class="floater_content" id="switchFloor2">
+							<div class="floater_cell">
+								<image src="img/diamond.png" width="75px" height="75px"></image>
+								<h4>Floor 2</h4>
+								<button class="button_blue" onclick="switchFloor(2)">Enter</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="floor1">
+					<div class="floor">
+						<h2>Floor 1</h2>
+						<button id="btnExploreFloor1" class="button_blue" onclick="btnExplore()">Explore</button>
+						<button class="button_blue" onclick="switchFloor(0)">Switch Floor</button>
+						<p id="floor1exp">0 Exploration XP</p>
+						<div class="floorexpBar" id="floorexpBar"><div class="floorexpBarText" id="floorexpBarText">0 EXP</div><div class="floorexpBarInner" id="floorexpBarInner"></div></div>
+					</div>
+					<div class="floater">
+						<div class="floater_content" id="rusty_supply_chest">
+							<div class="floater_cell">
+								<image src="img/wooden_chest.png" width="75px" height="75px"></image>
+								<h4>Rusty Supply Chest</h4>
+								<p>A rusty wooden chest.</p>
+								<button class="button_blue" onclick="lootChest(0)">Loot</button>
+							</div>
+						</div>
+						<div class="floater_content" id="mushroom_patch">
+							<div class="floater_cell">
+								<image src="img/mushroom.png" width="75px" height="75px"></image>
+								<h4>Mushroom Patch</h4>
+								<div id="mushroom_patch_text">
+									<p>These mushrooms looks edible.</p>
+								</div>
+								<div id="mushroom_patch_progress" style="display: none; margin-bottom: 20px;">
+									<p>Gathering...</p>
+									<div class="gatherBar" id="mushroomPatchBar"><div class="gatherBarText" id="mushroomPatchBarText">0%</div><div class="gatherBarInner" id="mushroomPatchBarInner"></div></div>
+								</div>
+								<button id="btnGatherMushroomPatch" class="button_blue" onclick="btnGatherMushroomPatch()">Gather</button>
+							</div>
+						</div>
+						<div class="floater_content" id="whispering_hollow">
+							<div class="floater_cell">
+								<image src="img/whispering_hollow.png" width="75px" height="75px"></image>
+								<h4>Whispering Hollow</h4>
+								<div id="whispering_hollow_text">
+									<p>A giant hole in the ground that seemingly have no bottom. It's sending gust of wind upwards on occassion.</p>
+								</div>
+								<div id="whispering_hollow_progress" style="display: none; margin-bottom: 20px;">
+									<p>Gathering...</p>
+									<div class="gatherBar" id="whisperingHollowBar"><div class="gatherBarText" id="whisperingHollowBarText">0%</div><div class="gatherBarInner" id="whisperingHollowBarInner"></div></div>
+								</div>
+								<button id="btnGatherWhisperingHollow" class="button_blue" onclick="btnGatherWhisperingHollow()">Gather</button>
+							</div>
+						</div>
+						<div class="floater_content" id="abandoned_camp">
+							<div class="floater_cell">
+								<image src="img/abandoned_camp.png" width="75px" height="75px"></image>
+								<h4>Abandoned Camp</h4>
+								<p>This camp has been abandoned by the previous adventurer. There could be something valuable left behind.</p>
+								<button class="button_blue" onclick="lootNode(0)">Loot</button>
+							</div>
+						</div>
+						<div class="floater_content" id="giant_rat_nest">
+							<div class="floater_cell">
+								<image src="img/giant_rat_nest.png" width="75px" height="75px"></image>
+								<h4>Giant Rat Nest</h4>
+								<div id="giant_rat_nest_text">
+									<p>Massive rats are all over this particular area.</p>
+								</div>
+								<div id="giant_rat_nest_progress" style="display: none; margin-bottom: 20px;">
+									<p>Fighting Giant Rat...</p>
+									<div class="enemyBar" id="giantRatNestBar"><div class="enemyBarText" id="giantRatNestBarText">0%</div><div class="enemyBarInner" id="giantRatNestBarInner"></div></div>
+								</div>
+								<button id="btnFightGiantRatNest" class="button_blue" onclick="btnFightGiantRatNest()">Fight</button>
+							</div>
+						</div>
+						<div class="floater_content" id="glowing_butterflies">
+							<div class="floater_cell">
+								<image src="img/vibrant_wing.png" width="75px" height="75px"></image>
+								<h4>Glowing Butterflies</h4>
+								<div id="glowing_butterflies_text">
+									<p>Their glow grow brighter the faster they fly.</p>
+								</div>
+								<div id="glowing_butterflies_progress" style="display: none; margin-bottom: 20px;">
+									<p>Gathering...</p>
+									<div class="gatherBar" id="glowingButterfliesBar"><div class="gatherBarText" id="glowingButterfliesBarText">0%</div><div class="gatherBarInner" id="glowingButterfliesBarInner"></div></div>
+								</div>
+								<button id="btnGatherGlowingButterflies" class="button_blue" onclick="btnGatherGlowingButterflies()">Gather</button>
+							</div>
+						</div>
+						<div class="node_main_challenge" id="great_king_rat">
+							<div class="floater_cell">
+								<image src="img/great_king_rat.png" width="75px" height="75px"></image>
+								<h4>Great King Rat</h4>
+								<div id="great_king_rat_text">
+									<p>This one rat is bigger than the rest. The small clot of hair on its head even resembles a crown.</p>
+								</div>
+								<div id="great_king_rat_progress" style="display: none; margin-bottom: 20px;">
+									<p>Fighting Great King Rat...</p>
+									<div class="bossBar" id="greatKingRatBar"><div class="bossBarText" id="greatKingRatBarText">0%</div><div class="bossBarInner" id="greatKingRatBarInner"></div></div>
+								</div>
+								<button id="btnFightGreatKingRat" class="button_blue" onclick="btnFightGreatKingRat()">Fight</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="floor2">
+					<div class="floor">
+						<h2>Floor 2</h2>
+						<button id="btnExploreFloor2" class="button_blue" onclick="btnExplore()">Explore</button>
+						<button class="button_blue" onclick="switchFloor(0)">Switch Floor</button>
+						<p id="floor2exp">0 Exploration XP</p>
+						<div class="floorexpBar" id="floor2expBar"><div class="floorexpBarText" id="floor2expBarText">0 EXP</div><div class="floorexpBarInner" id="floor2expBarInner"></div></div>
+					</div>
+					<div class="floater">
+						<div class="floater_content" id="wooden_chest">
+							<div class="floater_cell">
+								<image src="img/wooden_chest.png" width="75px" height="75px"></image>
+								<h4>Wooden Chest</h4>
+								<p>A wooden chest.</p>
+								<button class="button_blue" onclick="lootChest(1)">Loot</button>
+							</div>
+						</div>
+						<div class="floater_content" id="nightworm">
+							<div class="floater_cell">
+								<image src="img/nightworm.png" width="75px" height="75px"></image>
+								<h4>Nightworm</h4>
+								<div id="nightworm_text">
+									<p>Is it even worth it to deal with this thing?</p>
+								</div>
+								<div id="nightworm_progress" style="display: none; margin-bottom: 20px;">
+									<p>Fighting Nightworm...</p>
+									<div class="enemyBar" id="nightwormBar"><div class="enemyBarText" id="nightwormBarText">0%</div><div class="enemyBarInner" id="nightwormBarInner"></div></div>
+								</div>
+								<button id="btnFightNightworm" class="button_blue" onclick="btnFightNightworm()">Fight</button>
+							</div>
+						</div>
+						<div class="floater_content" id="abandoned_camp2">
+							<div class="floater_cell">
+								<image src="img/abandoned_camp.png" width="75px" height="75px"></image>
+								<h4>Abandoned Camp</h4>
+								<p>This camp has been abandoned by the previous adventurer. There could be something valuable left behind.</p>
+								<button class="button_blue" onclick="lootNode(1)">Loot</button>
+							</div>
+						</div>
+						<div class="floater_content" id="wooden_chest2">
+							<div class="floater_cell">
+								<image src="img/wooden_chest.png" width="75px" height="75px"></image>
+								<h4>Wooden Chest</h4>
+								<p>A wooden chest.</p>
+								<button class="button_blue" onclick="lootChest(2)">Loot</button>
+							</div>
+						</div>
+						<div class="floater_content" id="shadowed_crevice">
+							<div class="floater_cell">
+								<image src="img/shadowed_crevice.png" width="75px" height="75px"></image>
+								<h4>Shadowed Crevice</h4>
+								<div id="shadowed_crevice_text">
+									<p>A narrow crevice spitting out specks of dust.</p>
+								</div>
+								<div id="shadowed_crevice_progress" style="display: none; margin-bottom: 20px;">
+									<p>Gathering...</p>
+									<div class="gatherBar" id="shadowedCreviceBar"><div class="gatherBarText" id="shadowedCreviceBarText">0%</div><div class="gatherBarInner" id="shadowedCreviceBarInner"></div></div>
+								</div>
+								<button id="btnGatherShadowedCrevice" class="button_blue" onclick="btnGatherShadowedCrevice()">Gather</button>
+							</div>
+						</div>
+						<div class="floater_content" id="hellhound">
+							<div class="floater_cell">
+								<image src="img/hellhound.png" width="75px" height="75px"></image>
+								<h4>Hellhound</h4>
+								<div id="hellhound_text">
+									<p>Perhaps I shouldn't get too close...</p>
+								</div>
+								<div id="hellhound_progress" style="display: none; margin-bottom: 20px;">
+									<p>Fighting Hellhound...</p>
+									<div class="enemyBar" id="hellhoundBar"><div class="enemyBarText" id="hellhoundBarText">0%</div><div class="enemyBarInner" id="hellhoundBarInner"></div></div>
+								</div>
+								<button id="btnFightHellhound" class="button_blue" onclick="btnFightHellhound()">Fight</button>
+							</div>
+						</div>
+						<div class="node_main_challenge" id="fire_hellhound">
+							<div class="floater_cell">
+								<image src="img/fire_hellhound.png" width="75px" height="75px"></image>
+								<h4>Fire Hellhound</h4>
+								<div id="fire_hellhound_text">
+									<p>Fiery rage shown through the creature eyes. It's ready to pounce at the slightest approach.</p>
+								</div>
+								<div id="fire_hellhound_progress" style="display: none; margin-bottom: 20px;">
+									<p>Fighting Fire Hellhound...</p>
+									<div class="bossBar" id="fireHellhoundBar"><div class="bossBarText" id="fireHellhoundBarText">0%</div><div class="bossBarInner" id="fireHellhoundBarInner"></div></div>
+								</div>
+								<button id="btnFightFireHellhound" class="button_blue" onclick="btnFightFireHellhound()">Fight</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</content>
+			<div id="modalSettings" class="modal">
+				<div class="modal-content">
+					<span onclick="modalSettingsClose()" class="close">&times;</span>
+					<h2>Settings</h2>
+					<h4>Saves</h4>
+					<input type="file" style="display: none;" id="openFile" accept=".txt"/>
+					<button id="btnImportSaves" class="button_blue" onclick="importSaves()">Import</button>
+					<button id="btnExportSaves" class="button_blue" onclick="exportSaves()">Export</button>
+					<button id="btnResetSaves" class="button_red" onclick="resetSaves()">Reset</button><br>
+				</div>
+			</div>
+			<div id="modalUpdates" class="modal">
+				<div class="modal-content">
+					<span onclick="modalUpdatesClose()" class="close">&times;</span>
+					<h2>Updates</h2>
+					<h4>Changelog</h4>
+						Version 0.1 - 31/01/2026
+						<ul>
+							<li>Floor 1 & 2 are currently available.</li>
+							<li>Melee & Gathering Skill capped at level 10.</li>
+							<li>2 Weapons.</li>
+							<li>2 Artifacts.</li>
+							<li>1 Food item.</li>
+						</ul>
+					<h4>Future Updates</h4>
+					<ul>
+						<li>Floor 3 & Floor 4.</li>
+						<li>Alchemy Skill.</li>
+						<li>Achievements</li>
+					</ul>
+				</div>
+			</div>
+			<div id="modalAbout" class="modal">
+				<div class="modal-content">
+					<span onclick="modalAboutClose()" class="close">&times;</span>
+					<h2>About</h2>
+					<h4>Idle Ruins v0.1</h4>
+					<p>Made by Devandz</p>
+					<p>Thanks for playing!</p>
+				</div>
+			</div>
+		</section>
+		<footer>
+			<p>Idle Ruins v0.1 - Devandz</p>
+		</footer>
+	</body>
+</html>
+
+<script language="javascript" src="js/explore.js"></script>
+<script language="javascript" src="js/loot.js"></script>
+<script language="javascript" src="js/gather.js"></script>
+<script language="javascript" src="js/fight.js"></script>
+<script language="javascript" src="js/saves.js"></script>
+<script language="javascript" src="js/lz-string.js"></script>
+<script>
+
+	// Variables
+	let health = 1000;
+	let maxhealth = 1000;
+	let mana = 1000;
+	let maxmana = 1000;
+	let activity = 0;
+	var lastdt;
+	var inventory = [];
+	let gatherNode = 0;
+	let fightNode = 0;
+	let p1s = 0; // Perks 1 timer
+	let p1xp = 0; // Bonus EXP from perks
+
+	// Floors
+	let floor1maxexp = 3500;
+	let floor2maxexp = 5000;
+	let currentFloor = 0;
+	var floorStatus = [1, 0];
+
+	// Artifacts
+	let artifact1 = 0;
+	let artifact2 = 0;
+	let artifact3 = 0;
+	let artifact4 = 0;
+	let artifact5 = 0;
+	let artifactAtt = 0;
+	let artifactDef = 0;
+
+	// Node Progress
+	let mushroomPatchProg = 0;
+	let whisperingHollowProg = 0;
+	let glowingButterfliesProg = 0;
+	let shadowedCreviceProg = 0;
+
+	// Enemy Health
+	let giantRatHealth = 1000;
+	let greatKingRatHealth = 5000;
+	let nightwormHealth = 3000;
+	let hellhoundHealth = 6000;
+	let fireHellhoundHealth = 10000;
+
+	// Loot Node Availability
+	let abandonedcamp = true;
+	let abandonedcamp2 = true;
+	var lootChestStatus = [0, 0];
+	var lootNodeStatus = [0, 0];
+
+	let logs = ["Welcome to Idle Ruins 0.1!"];
+
+	// On Load
+
+	// Check if New Player
+	checkNewPlayer();
+	// Enter the current floor
+	switchFloor(currentFloor);
+	// Unlock Floors
+	updateFloor();
+	// Load Chests
+	updateLootChest();
+	// Load Loot Nodes
+	updateLootNode();
+	// Unlock Nodes
+	unlocksFloor1();
+	unlocksFloor2();
+	// Update Base Stats
+	updateBaseStats();
+	// Update Skills
+	updateSkills();
+	// Load Inventory
+	loadInventory();
+	// Load Equipment
+	loadEquipment();
+	// Load Artifact
+	loadArtifact();
+
+	// Get Health
+	getHealth();
+	// Get Mana
+	getMana();
+
+	// Update EXP and Progressbar
+
+	// Floor 1
+	const result = localStorage.getItem("floor1exp") / (floor1maxexp / 100);
+	document.getElementById("floor1exp").innerHTML = localStorage.getItem("floor1exp") + " / " + floor1maxexp + " Exploration XP (" + result.toFixed(2) + "%)";
+	progressFloor1(result.toFixed(2), true);
+	if (localStorage.getItem("floor1exp") >= floor1maxexp){
+		document.getElementById('btnExploreFloor1').style.display = "none";
+	}
+
+	// Floor 2
+	const result2 = localStorage.getItem("floor2exp") / (floor2maxexp / 100);
+	document.getElementById("floor2exp").innerHTML = localStorage.getItem("floor2exp") + " / " + floor2maxexp + " Exploration XP (" + result2.toFixed(2) + "%)";
+	progressFloor2(result2.toFixed(2), true);
+	if (localStorage.getItem("floor2exp") >= floor2maxexp){
+		document.getElementById('btnExploreFloor2').style.display = "none";
+	}
+
+	setInterval(explore, 200);
+	setInterval(checkGather, 200);
+	setInterval(checkFight, 200);
+	setInterval(updateActivity, 500);
+	setInterval(statsRegen, 1000);
+	setInterval(getPerks, 1000);
+
+	// Main Tabs
+	document.getElementById("mainTabButtonSkills").click();
+
+	function openMainTab(evt, id) {
+		var i, mainTabContent, mainTabButton;
+
+		mainTabContent = document.getElementsByClassName("mainTabContent");
+		for (i = 0; i < mainTabContent.length; i++) {
+			mainTabContent[i].style.display = "none";
+		}
+
+		mainTabButton = document.getElementsByClassName("mainTabButton");
+		for (i = 0; i < mainTabButton.length; i++) {
+			mainTabButton[i].className = mainTabButton[i].className.replace(" active", "");
+		}
+
+		document.getElementById(id).style.display = "block";
+		evt.currentTarget.className += " active";
+	}
+
+	// Functions
+
+	function checkNewPlayer(){ // Not Working
+		// Check if localstorage is empty / most likely new player
+		if (localStorage.getItem("health") === null){
+			localStorage.setItem("health", 1000);
+		}
+		if (localStorage.getItem("mana") === null){
+			localStorage.setItem("mana", 1000);
+		}
+		if (localStorage.getItem("meleeXP") === null){
+			localStorage.setItem("meleeXP", 0);
+		}
+		if (localStorage.getItem("gatheringXP") === null){
+			localStorage.setItem("gatheringXP", 0);
+		}
+		if (localStorage.getItem("floor1exp") === null){
+			localStorage.setItem("floor1exp", 0);
+		}
+		if (localStorage.getItem("floor2exp") === null){
+			localStorage.setItem("floor2exp", 0);
+		}
+		if (localStorage.getItem("floorStatus") === null){
+			localStorage.setItem("floorStatus", JSON.stringify(floorStatus));
+		}
+		if (localStorage.getItem("lootChestStatus") === null){
+			localStorage.setItem("lootChestStatus", JSON.stringify(lootChestStatus));
+		}
+		if (localStorage.getItem("lootNodeStatus") === null){
+			localStorage.setItem("lootNodeStatus", JSON.stringify(lootNodeStatus));
+		}
+		if (localStorage.getItem("weapon") === null){
+			localStorage.setItem("weapon", 0);
+		}
+		if (localStorage.getItem("artifact1") === null){
+			localStorage.setItem("artifact1", 0);
+		}
+		if (localStorage.getItem("artifact2") === null){
+			localStorage.setItem("artifact2", 0);
+		}
+		if (localStorage.getItem("artifact3") === null){
+			localStorage.setItem("artifact3", 0);
+		}
+		if (localStorage.getItem("artifact4") === null){
+			localStorage.setItem("artifact4", 0);
+		}
+		if (localStorage.getItem("artifact5") === null){
+			localStorage.setItem("artifact5", 0);
+		}
+		
+		//alert(localStorage.getItem("inventory"));
+		//if (localStorage.getItem("floor2exp") === null){
+		//	localStorage.setItem("floor2exp", 0);
+		//}
+	}
+
+	function updateActivity(){
+		if (activity == 0){
+			document.getElementById("characterActivity").innerHTML = "Idle";
+		}
+		else if (activity == 1){
+			document.getElementById("characterActivity").innerHTML = "Exploring...";
+		}
+		else if (activity == 2){
+			document.getElementById("characterActivity").innerHTML = "Gathering...";
+		}
+		else if (activity == 3){
+			document.getElementById("characterActivity").innerHTML = "Fighting...";
+		}
+		else if (activity == -1){
+			document.getElementById("characterActivity").innerHTML = "You're Dead";
+		}
+	}
+
+	function updateFloor(){
+		if (localStorage.getItem("floorStatus") === null){
+			checkNewPlayer();
+		}
+		else{
+			floorStatus = JSON.parse(localStorage.getItem("floorStatus"));
+			
+			if (floorStatus[1] == 1){
+				document.getElementById('switchFloor2').style.display = "table";
+			}
+			else {
+				document.getElementById('switchFloor2').style.display = "none";
+			}
+		}
+	}
+
+	function changeFloorStatus(id, status, update){
+		floorStatus = JSON.parse(localStorage.getItem("floorStatus"));
+		floorStatus[id] = status;
+		localStorage.setItem("floorStatus", JSON.stringify(floorStatus));
+		if (update == true){
+			updateFloor();
+		}
+	}
+
+	function getRandomNumber(min, max) {
+		return Math.floor(Math.random() * (max - min + 1) ) + min;
+	}
+
+	function switchFloor(id){
+		switchActivity(0);
+		if (id == 0){
+			currentFloor = 0;
+			document.getElementById('switchFloor').style.display = "block";
+			document.getElementById('floor1').style.display = "none";
+			document.getElementById('floor2').style.display = "none";
+		}
+		else if (id == 1){
+			currentFloor = 1;
+			document.getElementById('switchFloor').style.display = "none";
+			document.getElementById('floor1').style.display = "block";
+			document.getElementById('floor2').style.display = "none";
+		}
+		else if (id == 2){
+			currentFloor = 2;
+			document.getElementById('switchFloor').style.display = "none";
+			document.getElementById('floor1').style.display = "none";
+			document.getElementById('floor2').style.display = "block";
+		}
+	}
+
+	function switchActivity(id){
+		// Idle - Default
+		activity = 0;
+		lastdt = null;
+		document.getElementById('content').style.display = "block";
+		document.getElementById('btnRevive').style.display = "none";
+		document.getElementById('mainTabs').style.display = "block";
+		document.getElementById('btnExploreFloor1').innerHTML = "Explore";
+		document.getElementById('btnExploreFloor2').innerHTML = "Explore";
+		document.getElementById('btnGatherMushroomPatch').innerHTML = "Gather";
+		document.getElementById('mushroom_patch_text').style.display = "block";
+		document.getElementById('mushroom_patch_progress').style.display = "none";
+		document.getElementById('btnGatherWhisperingHollow').innerHTML = "Gather";
+		document.getElementById('whispering_hollow_text').style.display = "block";
+		document.getElementById('whispering_hollow_progress').style.display = "none";
+		document.getElementById('btnGatherGlowingButterflies').innerHTML = "Gather";
+		document.getElementById('glowing_butterflies_text').style.display = "block";
+		document.getElementById('glowing_butterflies_progress').style.display = "none";
+		document.getElementById('btnGatherShadowedCrevice').innerHTML = "Gather";
+		document.getElementById('shadowed_crevice_text').style.display = "block";
+		document.getElementById('shadowed_crevice_progress').style.display = "none";
+		document.getElementById('btnFightGiantRatNest').innerHTML = "Fight";
+		document.getElementById('giant_rat_nest_text').style.display = "block";
+		document.getElementById('giant_rat_nest_progress').style.display = "none";
+		document.getElementById('btnFightGreatKingRat').innerHTML = "Fight";
+		document.getElementById('great_king_rat_text').style.display = "block";
+		document.getElementById('great_king_rat_progress').style.display = "none";
+		document.getElementById('btnFightNightworm').innerHTML = "Fight";
+		document.getElementById('nightworm_text').style.display = "block";
+		document.getElementById('nightworm_progress').style.display = "none";
+		document.getElementById('btnFightHellhound').innerHTML = "Fight";
+		document.getElementById('hellhound_text').style.display = "block";
+		document.getElementById('hellhound_progress').style.display = "none";
+		document.getElementById('btnFightFireHellhound').innerHTML = "Fight";
+		document.getElementById('fire_hellhound_text').style.display = "block";
+		document.getElementById('fire_hellhound_progress').style.display = "none";
+		document.getElementById('characterBanner').style.backgroundColor = "darkslategray";
+		
+		if (id == -1){ // Dead
+			activity = -1;
+			document.getElementById('content').style.display = "none";
+			document.getElementById('btnRevive').style.display = "inline-block";
+			document.getElementById('mainTabs').style.display = "none";
+			document.getElementById('mainTabSkills').style.display = "none";
+			document.getElementById('mainTabEquipment').style.display = "none";
+			document.getElementById('mainTabInventory').style.display = "none";
+			document.getElementById('mainTabLogs').style.display = "none";
+			document.getElementById('characterBanner').style.backgroundColor = "#100c08";
+		}
+		else if (id == 1){ // Explore
+			activity = 1;
+			if (currentFloor == 1){
+				document.getElementById('btnExploreFloor1').innerHTML = "Stop Exploring";
+			}
+			else if (currentFloor == 2){
+				document.getElementById('btnExploreFloor2').innerHTML = "Stop Exploring";
+			}
+		}
+		else if (id == 2){ // Gather
+			activity = 2;
+			if (gatherNode == 1){
+				document.getElementById('btnGatherWhisperingHollow').innerHTML = "Stop Gathering";
+				document.getElementById('whispering_hollow_text').style.display = "none";
+				document.getElementById('whispering_hollow_progress').style.display = "block";
+			}
+			else if (gatherNode == 2){
+				document.getElementById('btnGatherGlowingButterflies').innerHTML = "Stop Gathering";
+				document.getElementById('glowing_butterflies_text').style.display = "none";
+				document.getElementById('glowing_butterflies_progress').style.display = "block";
+			}
+			else if (gatherNode == 3){
+				document.getElementById('btnGatherShadowedCrevice').innerHTML = "Stop Gathering";
+				document.getElementById('shadowed_crevice_text').style.display = "none";
+				document.getElementById('shadowed_crevice_progress').style.display = "block";
+			}
+			else if (gatherNode == 4){
+				document.getElementById('btnGatherMushroomPatch').innerHTML = "Stop Gathering";
+				document.getElementById('mushroom_patch_text').style.display = "none";
+				document.getElementById('mushroom_patch_progress').style.display = "block";
+			}
+		}
+		else if (id == 3){ // Fight
+			activity = 3;
+			if (fightNode == 1){
+				document.getElementById('btnFightGiantRatNest').innerHTML = "Stop Fighting";
+				document.getElementById('giant_rat_nest_text').style.display = "none";
+				document.getElementById('giant_rat_nest_progress').style.display = "block";
+			}
+			else if (fightNode == 2){
+				document.getElementById('btnFightGreatKingRat').innerHTML = "Stop Fighting";
+				document.getElementById('great_king_rat_text').style.display = "none";
+				document.getElementById('great_king_rat_progress').style.display = "block";
+			}
+			else if (fightNode == 3){
+				document.getElementById('btnFightNightworm').innerHTML = "Stop Fighting";
+				document.getElementById('nightworm_text').style.display = "none";
+				document.getElementById('nightworm_progress').style.display = "block";
+			}
+			else if (fightNode == 4){
+				document.getElementById('btnFightHellhound').innerHTML = "Stop Fighting";
+				document.getElementById('hellhound_text').style.display = "none";
+				document.getElementById('hellhound_progress').style.display = "block";
+			}
+			else if (fightNode == 5){
+				document.getElementById('btnFightFireHellhound').innerHTML = "Stop Fighting";
+				document.getElementById('fire_hellhound_text').style.display = "none";
+				document.getElementById('fire_hellhound_progress').style.display = "block";
+			}
+		}
+	}
+
+	function addSkillXP(skill, xp){
+		if (skill == 1){ // Melee
+			// Get current Melee XP and add
+			let mxp = parseInt(localStorage.getItem("meleeXP"));
+			mxp = mxp + xp;
+			if (mxp > 76488) {
+				// If reaches max EXP
+				mxp = 76488;
+			}
+
+			localStorage.setItem("meleeXP", mxp);
+		}
+		else if (skill == 2){ // Gathering
+			// Get current Gathering XP and add
+			let gxp = parseInt(localStorage.getItem("gatheringXP"));
+			gxp = gxp + xp;
+			if (gxp > 76488) {
+				// If reaches max EXP
+				gxp = 76488;
+			}
+
+			localStorage.setItem("gatheringXP", gxp);
+		}
+		
+		updateSkills();
+		updateBaseStats();
+	}
+
+	function updateBaseStats(){
+		let att = getAttack();
+		att += artifactAtt;
+
+		document.getElementById('baseStatsAttack').innerHTML = "Attack: <b>" + att + "</b>";
+		document.getElementById('baseStatsDefense').innerHTML = "Defense: <b>" + artifactDef + "</b>";
+	}
+
+	function updateSkills(){
+		if (localStorage.getItem("meleeXP") === null || localStorage.getItem("gatheringXP") === null){
+			checkNewPlayer();
+		}
+		else{
+			let mxp = parseInt(localStorage.getItem("meleeXP"));
+			let gxp = parseInt(localStorage.getItem("gatheringXP"));
+
+			// Update the interface
+			document.getElementById('meleeXP').innerHTML = mxp;
+			document.getElementById('meleeLevel').innerHTML = getLevelfromXP(mxp);
+			document.getElementById('meleeLevelToolTip').innerHTML = getLevelfromXP(mxp);
+			document.getElementById('meleeNextXP').innerHTML = getNextLevelXP(mxp);
+			document.getElementById('gatheringXP').innerHTML = gxp;
+			document.getElementById('gatheringLevel').innerHTML = getLevelfromXP(gxp);
+			document.getElementById('gatheringLevelToolTip').innerHTML = getLevelfromXP(gxp);
+			document.getElementById('gatheringNextXP').innerHTML = getNextLevelXP(gxp);
+		}
+	}
+
+	function getLevelfromXP(xp){
+		let level = 1;
+		// Calculate the skill level from xp
+		if (xp >= 50){
+			level = 2;
+		}
+		if (xp >= 125){
+			level = 3;
+		}
+		if (xp >= 313){
+			level = 4;
+		}
+		if (xp >= 783){
+			level = 5;
+		}
+		if (xp >= 1958){
+			level = 6;
+		}
+		if (xp >= 4895){
+			level = 7;
+		}
+		if (xp >= 12238){
+			level = 8;
+		}
+		if (xp >= 30595){
+			level = 9;
+		}
+		if (xp >= 76488){
+			level = 10;
+		}
+		//if (xp >= 150000){
+		//	level = 11;
+		//}
+
+		return level;
+	}
+
+	function getNextLevelXP(xp){
+		let nxp = 0;
+		// Calculate XP required for next level
+		if (xp >= 50){
+			nxp = 125;
+		}
+		if (xp >= 125){
+			nxp = 313;
+		}
+		if (xp >= 313){
+			nxp = 783;
+		}
+		if (xp >= 783){
+			nxp = 1958;
+		}
+		if (xp >= 1958){
+			nxp = 4895;
+		}
+		if (xp >= 4895){
+			nxp = 12238;
+		}
+		if (xp >= 12238){
+			nxp = 30595;
+		}
+		if (xp >= 30595){
+			nxp = 76488;
+		}
+		if (xp >= 76488){
+			nxp = 76488;
+		}
+
+		return nxp;
+	}
+
+	function loadEquipment(){
+		// Load Weapon
+		if (localStorage.getItem("weapon") != null){
+			weapon = JSON.parse(localStorage.getItem("weapon"));
+			if (weapon == 2){
+				document.getElementById('weapon').innerHTML = "<div class='inventoryIcon' style='background-image: url(img/bronze_sword.png); background-size: cover; background-position: center; display: flex;'><span class='inventoryToolTip'><b>Bronze Sword</b><br><br>+100 Attack</span></div>";
+			}
+			else if (weapon == 12){
+				document.getElementById('weapon').innerHTML = "<div class='inventoryIcon' style='background-image: url(img/silver_sword.png); background-size: cover; background-position: center; display: flex;'><span class='inventoryToolTip'><b>Silver Sword</b><br><br>+120 Attack<br><br>Before every attack, gains +20 Attack. Costs 20 Mana.</span></div>";
+			}
+			else{
+				document.getElementById('weapon').innerHTML = "";
+			}
+		}
+
+		updateBaseStats();
+	}
+
+	function loadArtifact(){
+		// Reset artifact stats
+		artifactAtt = 0;
+		artifactDef = 0;
+
+		for (let i = 1; i < 6; i++) {
+			if (localStorage.getItem("artifact" + i) != null){
+				art = JSON.parse(localStorage.getItem("artifact" + i));
+				if (art == 7){
+					document.getElementById('artifact' + i).innerHTML = "<div class='inventoryIcon' style='background-image: url(img/crown_of_the_rat_king.png); background-size: cover; background-position: center; display: flex;'><span class='inventoryToolTip'><b>Crown of the Rat King</b><br><br>+10 Defense<br><br>Swift Regeneration (Passive): When HP is less than 25, Heals for 50HP. Costs 20 Mana.</span></div>";
+					artifactDef += 10;
+				}
+				else if (art == 11){
+					document.getElementById('artifact' + i).innerHTML = "<div class='inventoryIcon' style='background-image: url(img/molten_claw.png); background-size: cover; background-position: center; display: flex;'><span class='inventoryToolTip'><b>Molten Claw</b><br><br>+20 Attack</span></div>";
+					artifactAtt += 20;
+				}
+				else{
+					document.getElementById('artifact' + i).innerHTML = "";
+				}
+			}
+		}
+
+		updateBaseStats();
+	}
+
+	function loadInventory(){
+		if (localStorage.getItem("inventory") != null){
+			inventory = JSON.parse(localStorage.getItem("inventory"));
+			
+			// Inventory interface
+			var i = "";
+			
+			// Weapons
+			if (inventory[2] > 0){
+				i += "<div class='inventoryIcon' onclick='equipWeapon(2)' style='background-image: url(img/bronze_sword.png); background-size: cover; background-position: center; display: flex;'>" + inventory[2] + "<span class='inventoryToolTip'><b>Bronze Sword</b><br><br>+100 Attack<br><br>Amount: " + inventory[2] + "</span></div>";
+			}
+			if (inventory[12] > 0){
+				i += "<div class='inventoryIcon' onclick='equipWeapon(12)' style='background-image: url(img/silver_sword.png); background-size: cover; background-position: center; display: flex;'>" + inventory[12] + "<span class='inventoryToolTip'><b>Silver Sword</b><br><br>+120 Attack<br><br>Before every attack, gains +20 Attack. Costs 20 Mana.<br><br>Amount: " + inventory[12] + "</span></div>";
+			}
+
+			// Artifact
+			if (inventory[7] > 0){
+				i += "<div class='inventoryIcon' onclick='equipArtifact(7)' style='background-image: url(img/crown_of_the_rat_king.png); background-size: cover; background-position: center; display: flex;'>" + inventory[7] + "<span class='inventoryToolTip'><b>Crown of the Rat King</b><br><br>+10 Defense<br><br>Swift Regeneration (Passive): When HP is less than 25, Heals for 50HP. Costs 20 Mana.<br><br>Amount: " + inventory[7] + "</span></div>";
+			}
+			if (inventory[11] > 0){
+				i += "<div class='inventoryIcon' onclick='equipArtifact(11)' style='background-image: url(img/molten_claw.png); background-size: cover; background-position: center; display: flex;'>" + inventory[11] + "<span class='inventoryToolTip'><b>Molten Claw</b><br><br>+20 Attack<br><br>Amount: " + inventory[11] + "</span></div>";
+			}
+
+			// Items
+			if (inventory[3] > 0){
+				i += "<div class='inventoryIcon' style='background-image: url(img/air_essence.png); background-size: cover; background-position: center; display: flex;'>" + inventory[3] + "<span class='inventoryToolTip'><b>Air Essence</b><br><br>Amount: " + inventory[3] + "</span></div>";
+			}
+			if (inventory[9] > 0){
+				i += "<div class='inventoryIcon' style='background-image: url(img/earth_essence.png); background-size: cover; background-position: center; display: flex;'>" + inventory[9] + "<span class='inventoryToolTip'><b>Earth Essence</b><br><br>Amount: " + inventory[9] + "</span></div>";
+			}
+			if (inventory[4] > 0){
+				i += "<div class='inventoryIcon' style='background-image: url(img/stick.png); background-size: cover; background-position: center; display: flex;'>" + inventory[4] + "<span class='inventoryToolTip'><b>Stick</b><br><br>Amount: " + inventory[4] + "</span></div>";
+			}
+			if (inventory[5] > 0){
+				i += "<div class='inventoryIcon' style='background-image: url(img/vibrant_wing.png); background-size: cover; background-position: center; display: flex;'>" + inventory[5] + "<span class='inventoryToolTip'><b>Vibrant Wing</b><br><br>Amount: " + inventory[5] + "</span></div>";
+			}
+			if (inventory[6] > 0){
+				i += "<div class='inventoryIcon' style='background-image: url(img/giant_rat_claw.png); background-size: cover; background-position: center; display: flex;'>" + inventory[6] + "<span class='inventoryToolTip'><b>Giant Rat\'s Claw</b><br><br>Amount: " + inventory[6] + "</span></div>";
+			}
+			if (inventory[8] > 0){
+				i += "<div class='inventoryIcon' style='background-image: url(img/slime.png); background-size: cover; background-position: center; display: flex;'>" + inventory[8] + "<span class='inventoryToolTip'><b>Nightworm Slime</b><br><br>Amount: " + inventory[8] + "</span></div>";
+			}
+			if (inventory[10] > 0){
+				i += "<div class='inventoryIcon' style='background-image: url(img/hellhound_fang.png); background-size: cover; background-position: center; display: flex;'>" + inventory[10] + "<span class='inventoryToolTip'><b>Hellhound\'s Fang</b><br><br>Amount: " + inventory[10] + "</span></div>";
+			}
+			if (inventory[1] > 0){
+				i += "<div class='inventoryIcon' onclick='useItem(1)'  style='background-image: url(img/mushroom.png); background-size: cover; background-position: center; display: flex;'>" + inventory[1] + "<span class='inventoryToolTip'><b>Mushroom</b><br><br><span style='color: darkgreen;'>Heals 50HP</span><br><br>Amount: " + inventory[1] + "</span></div>";
+			}
+
+			document.getElementById("inventoryContainer").innerHTML = i;
+		}
+	}
+
+	function addInventory(id, amount, load){
+		let i = 0;
+		if (inventory[id] != null){
+			i = inventory[id];
+		}
+		i = i + amount;
+		inventory[id] = i;
+		localStorage.setItem("inventory", JSON.stringify(inventory));
+		if (load == true){
+			loadInventory();
+		}
+	}
+
+	function removeInventory(id, amount, load){
+		let i = 0;
+		if (inventory[id] != null){
+			i = inventory[id];
+		}
+		i = i - amount;
+		inventory[id] = i;
+		localStorage.setItem("inventory", JSON.stringify(inventory));
+		if (load == true){
+			loadInventory();
+		}
+	}
+
+	function useItem(id){
+		if (id == 1){
+			increaseHealth(50);
+			removeInventory(id, 1, true);
+		}
+	}
+
+	function equipWeapon(id){
+		let w = localStorage.getItem("weapon");
+		if (id != w){
+			// Check if already equipped a weapon and remove them
+			if (id != null && id != 0){
+				removeWeapon();
+			}
+			localStorage.setItem("weapon", id);
+			removeInventory(id, 1, true);
+			loadEquipment();
+		}
+	}
+
+	function removeWeapon(){
+		let w = localStorage.getItem("weapon");
+		if (w != null){
+			localStorage.setItem("weapon", null);
+			addInventory(w, 1, true);
+			loadEquipment();
+		}
+	}
+
+	function equipArtifact(id){
+		let a1 = localStorage.getItem("artifact1");
+		let a2 = localStorage.getItem("artifact2");
+		let a3 = localStorage.getItem("artifact3");
+		let a4 = localStorage.getItem("artifact4");
+		let a5 = localStorage.getItem("artifact5");
+		if (a1 != id && a1 == 0){
+			localStorage.setItem("artifact1", id);
+			removeInventory(id, 1, true);
+		}
+		else if (a2 != id && a2 == 0){
+			localStorage.setItem("artifact2", id);
+			removeInventory(id, 1, true);
+		}
+		else if (a3 != id && a3 == 0){
+			localStorage.setItem("artifact3", id);
+			removeInventory(id, 1, true);
+		}
+		else if (a4 != id && a4 == 0){
+			localStorage.setItem("artifact4", id);
+			removeInventory(id, 1, true);
+		}
+		else if (a5 != id && a5 == 0){
+			localStorage.setItem("artifact5", id);
+			removeInventory(id, 1, true);
+		}
+		else{
+			alert("Artifact slots are full.");
+		}
+		
+		loadArtifact();
+	}
+
+	function removeArtifact(slot){
+		if (slot == 1){
+			let a1 = localStorage.getItem("artifact1");
+			if (a1 != null){
+				localStorage.setItem("artifact1", 0);
+				addInventory(a1, 1, true);
+			}
+		}
+		else if (slot == 2){
+			let a2 = localStorage.getItem("artifact2");
+			if (a2 != null){
+				localStorage.setItem("artifact2", 0);
+				addInventory(a2, 1, true);
+			}
+		}
+		else if (slot == 3){
+			let a3 = localStorage.getItem("artifact3");
+			if (a3 != null){
+				localStorage.setItem("artifact3", 0);
+				addInventory(a3, 1, true);
+			}
+		}
+		else if (slot == 4){
+			let a4 = localStorage.getItem("artifact4");
+			if (a4 != null){
+				localStorage.setItem("artifact4", 0);
+				addInventory(a4, 1, true);
+			}
+		}
+		else if (slot == 5){
+			let a5 = localStorage.getItem("artifact5");
+			if (a5 != null){
+				localStorage.setItem("artifact5", 0);
+				addInventory(a5, 1, true);
+			}
+		}
+
+		loadArtifact();
+	}
+
+	function showSettings(){
+		document.getElementById("modalSettings").style.display = "block";
+	}
+
+	function modalSettingsClose(){
+		document.getElementById("modalSettings").style.display = "none";
+	}
+
+	function showUpdates(){
+		document.getElementById("modalUpdates").style.display = "block";
+	}
+
+	function modalUpdatesClose(){
+		document.getElementById("modalUpdates").style.display = "none";
+	}
+
+	function showAbout(){
+		document.getElementById("modalAbout").style.display = "block";
+	}
+
+	function modalAboutClose(){
+		document.getElementById("modalAbout").style.display = "none";
+	}
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+		if (event.target == document.getElementById("modalSettings")) {
+			document.getElementById("modalSettings").style.display = "none";
+		}
+		else if (event.target == document.getElementById("modalUpdates")) {
+			document.getElementById("modalUpdates").style.display = "none";
+		}
+		else if (event.target == document.getElementById("modalAbout")) {
+			document.getElementById("modalAbout").style.display = "none";
+		}
+	}
+
+	function progressHealth(prog, showText){
+		if (showText == true){
+			document.getElementById("healthBarText").innerHTML = prog + "/1000";
+		}
+		document.getElementById("healthBarInner").style.width = (prog / 10) + "%";
+	}
+
+	function progressMana(prog, showText){
+		if (showText == true){
+			document.getElementById("manaBarText").innerHTML = prog + "/1000";
+		}
+		document.getElementById("manaBarInner").style.width = (prog / 10) + "%";
+	}
+
+	function progressFloor1(prog, showText){
+		if (showText == true){
+			document.getElementById("floorexpBarText").innerHTML = prog + "%";
+		}
+		document.getElementById("floorexpBarInner").style.width = prog + "%";
+	}
+
+	function progressFloor2(prog, showText){
+		if (showText == true){
+			document.getElementById("floor2expBarText").innerHTML = prog + "%";
+		}
+		document.getElementById("floor2expBarInner").style.width = prog + "%";
+	}
+
+	function progressGather(gatherNode, prog, showText){
+		if (gatherNode == 1){
+			if (showText == true){
+				document.getElementById("whisperingHollowBarText").innerHTML = prog + "%";
+			}
+			document.getElementById("whisperingHollowBarInner").style.width = prog + "%";
+		}
+		else if (gatherNode == 2){
+			if (showText == true){
+				document.getElementById("glowingButterfliesBarText").innerHTML = prog + "%";
+			}
+			document.getElementById("glowingButterfliesBarInner").style.width = prog + "%";
+		}
+		else if (gatherNode == 3){
+			if (showText == true){
+				document.getElementById("shadowedCreviceBarText").innerHTML = prog + "%";
+			}
+			document.getElementById("shadowedCreviceBarInner").style.width = prog + "%";
+		}
+		else if (gatherNode == 4){
+			if (showText == true){
+				document.getElementById("mushroomPatchBarText").innerHTML = prog + "%";
+			}
+			document.getElementById("mushroomPatchBarInner").style.width = prog + "%";
+		}
+	}
+
+	function progressFight(fightNode, prog, showText){
+		if (fightNode == 1){
+			if (showText == true){
+				document.getElementById("giantRatNestBarText").innerHTML = prog + "/1000";
+			}
+			document.getElementById("giantRatNestBarInner").style.width = (prog / 10) + "%";
+		}
+		else if (fightNode == 2){
+			if (showText == true){
+				document.getElementById("greatKingRatBarText").innerHTML = prog + "/5000";
+			}
+			document.getElementById("greatKingRatBarInner").style.width = (prog / 50) + "%";
+		}
+		else if (fightNode == 3){
+			if (showText == true){
+				document.getElementById("nightwormBarText").innerHTML = prog + "/3000";
+			}
+			document.getElementById("nightwormBarInner").style.width = (prog / 30) + "%";
+		}
+		else if (fightNode == 4){
+			if (showText == true){
+				document.getElementById("hellhoundBarText").innerHTML = prog + "/6000";
+			}
+			document.getElementById("hellhoundBarInner").style.width = (prog / 60) + "%";
+		}
+		else if (fightNode == 5){
+			if (showText == true){
+				document.getElementById("fireHellhoundBarText").innerHTML = prog + "/10000";
+			}
+			document.getElementById("fireHellhoundBarInner").style.width = (prog / 100) + "%";
+		}
+	}
+
+	function switch_floor(){
+		localStorage.setItem("floor1exp", 0);
+	}
+
+	function loadLogs(){
+		// Clear the UI element
+		document.getElementById("logs").innerHTML = null;
+
+		// Limit log entry to 1000
+		if (logs.length > 100){
+			logs.shift();
+		}
+
+		// Generate array to the UI 
+		for (let i = 0; i < logs.length; i++) {
+			document.getElementById("logs").innerHTML += logs[i] + "<br>";
+		}
+	}
+
+	function addLogs(msg){
+		logs.push(msg);
+		loadLogs();
+	}
+
+</script>
