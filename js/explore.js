@@ -101,42 +101,48 @@ function unlocksFloor1(){
     // Get Floor EXP
     let exp = parseInt(localStorage.getItem("floor1exp"));
 
-    if (exp >= 200){
+    // Prevent EXP from exceeding max EXP
+    if (exp > floor1maxexp){
+        localStorage.setItem("floor1exp", floor1maxexp);
+        exp = floor1maxexp;
+    }
+
+    if (exp >= 100){
         document.getElementById('mushroom_patch').style.display = "table";
     }
     else{
         document.getElementById('mushroom_patch').style.display = "none";
     }
 
-    if (exp >= 700){
-        document.getElementById('whispering_hollow').style.display = "table";
-    }
-    else{
-        document.getElementById('whispering_hollow').style.display = "none";
-    }
-
-    if (exp >= 1400 && lootNodeStatus[0] == 0){
-        document.getElementById('abandoned_camp').style.display = "table";
-    }
-    else{
-        document.getElementById('abandoned_camp').style.display = "none";
-    }
-
-    if (exp >= 2100){
+    if (exp >= 200){
         document.getElementById('giant_rat_nest').style.display = "table";
     }
     else{
         document.getElementById('giant_rat_nest').style.display = "none";
     }
 
-    if (exp >= 2800){
+    if (exp >= 400){
+        document.getElementById('whispering_hollow').style.display = "table";
+    }
+    else{
+        document.getElementById('whispering_hollow').style.display = "none";
+    }
+
+    if (exp >= 600 && lootNodeStatus[0] == 0){
+        document.getElementById('abandoned_camp').style.display = "table";
+    }
+    else{
+        document.getElementById('abandoned_camp').style.display = "none";
+    }
+
+    if (exp >= 800){
         document.getElementById('glowing_butterflies').style.display = "table";
     }
     else{
         document.getElementById('glowing_butterflies').style.display = "none";
     }
 
-    if (exp >= 3500){
+    if (exp >= 1000){
         document.getElementById('great_king_rat').style.display = "table";
     }
     else{
@@ -200,49 +206,55 @@ function unlocksFloor2(){
     // Get Floor EXP
     let exp = parseInt(localStorage.getItem("floor2exp"));
 
-    if (exp >= 700 && lootChestStatus[0] == 0){
+    // Prevent EXP from exceeding max EXP
+    if (exp > floor2maxexp){
+        localStorage.setItem("floor2exp", floor2maxexp);
+        exp = floor2maxexp;
+    }
+
+    if (exp >= 100 && lootChestStatus[0] == 0){
         document.getElementById('wooden_chest').style.display = "table";
     }
     else{
         document.getElementById('wooden_chest').style.display = "none";
     }
 
-    if (exp >= 1400){
+    if (exp >= 300){
         document.getElementById('nightworm').style.display = "table";
     }
     else{
         document.getElementById('nightworm').style.display = "none";
     }
 
-    if (exp >= 2100 && lootNodeStatus[1] == 0){
+    if (exp >= 500 && lootNodeStatus[1] == 0){
         document.getElementById('abandoned_camp2').style.display = "table";
     }
     else{
         document.getElementById('abandoned_camp2').style.display = "none";
     }
 
-    if (exp >= 2800 && lootChestStatus[1] == 0){
+    if (exp >= 800 && lootChestStatus[1] == 0){
         document.getElementById('wooden_chest2').style.display = "table";
     }
     else{
         document.getElementById('wooden_chest2').style.display = "none";
     }
 
-    if (exp >= 3500){
+    if (exp >= 1200){
         document.getElementById('shadowed_crevice').style.display = "table";
     }
     else{
         document.getElementById('shadowed_crevice').style.display = "none";
     }
 
-    if (exp >= 4200){
+    if (exp >= 1600){
         document.getElementById('hellhound').style.display = "table";
     }
     else{
         document.getElementById('hellhound').style.display = "none";
     }
 
-    if (exp >= 5000){
+    if (exp >= 2000){
         document.getElementById('fire_hellhound').style.display = "table";
     }
     else{
@@ -285,10 +297,10 @@ function getPerks(){
 
 function activatePerks(perks){
     if (perks == 1){
-        p1xp = 10;
+        p1xp = 15;
     }
     else if (perks == 2){
-        p1xp = 20;
+        p1xp = 25;
     }
     else if (perks == 3){
         p1xp = 50;

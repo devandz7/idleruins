@@ -16,8 +16,6 @@ function lootChest(id){
             switchActivity(0);
             addInventory(1, 10, true);
             addLogs("You've obtained 10 Mushrooms.");
-            // Switch to inventory tab
-            document.getElementById("mainTabButtonInventory").click();
             changeLootChestStatus(0, 1, true);
         }
         else {
@@ -29,9 +27,7 @@ function lootChest(id){
         if (lootChestStatus[1] == 0) {
             switchActivity(0);
             addInventory(1, 10, true);
-            addLogs("You've obtained 10 Mushrooms.");
-            // Switch to inventory tab
-            document.getElementById("mainTabButtonInventory").click();
+            addLogs("You've obtained 20 Mushrooms.");
             changeLootChestStatus(1, 1, true);
         }
         else {
@@ -50,14 +46,8 @@ function updateLootChest(){
         if (lootChestStatus[0] == 1){
             document.getElementById('wooden_chest').style.display = "none";
         }
-        else {
-            document.getElementById('wooden_chest').style.display = "table";
-        }
         if (lootChestStatus[1] == 1){
             document.getElementById('wooden_chest2').style.display = "none";
-        }
-        else {
-            document.getElementById('wooden_chest2').style.display = "table";
         }
     }
 }
@@ -77,8 +67,6 @@ function lootNode(id){
             switchActivity(0);
             addInventory(1, 3, true);
             addLogs("You've obtained 3 Mushrooms.");
-            // Switch to inventory tab
-            document.getElementById("mainTabButtonInventory").click();
             changeLootNodeStatus(0, 1, true);
         }
         else{
@@ -92,8 +80,6 @@ function lootNode(id){
             addLogs("You've obtained 3 Mushrooms.");
             addInventory(12, 1, true);
             addLogs("You've obtained a Silver Sword.");
-            // Switch to inventory tab
-            document.getElementById("mainTabButtonInventory").click();
             changeLootNodeStatus(1, 1, true);
         }
         else{
@@ -113,14 +99,8 @@ function updateLootNode(){
         if (lootNodeStatus[0] == 1){
             document.getElementById('abandoned_camp').style.display = "none";
         }
-        else {
-            document.getElementById('abandoned_camp').style.display = "table";
-        }
         if (lootNodeStatus[1] == 1){
             document.getElementById('abandoned_camp2').style.display = "none";
-        }
-        else {
-            document.getElementById('abandoned_camp2').style.display = "table";
         }
     }
 }

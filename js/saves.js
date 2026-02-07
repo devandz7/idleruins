@@ -18,7 +18,7 @@ ofd.onchange = e => {
 
         stxt = ds.split(",");
 
-        if (stxt[0] == "0.1"){ // If version 0.1
+        if (stxt[0] == "0.1" || stxt[0] == "0.1.1"){ // If version 0.1 / 0.1.1
             localStorage.setItem("health", stxt[1]);
             localStorage.setItem("mana", stxt[2]);
             localStorage.setItem("weapon", stxt[3]);
@@ -66,7 +66,7 @@ function exportSaves(){
     let efs = localStorage.getItem("floorStatus");
     let ecs = localStorage.getItem("lootChestStatus");
     let ens = localStorage.getItem("lootNodeStatus");
-    stxt.push("0.1"); // Game Version
+    stxt.push("0.1.1"); // Game Version
     stxt.push(localStorage.getItem("health"));
     stxt.push(localStorage.getItem("mana"));
     stxt.push(localStorage.getItem("weapon"));
