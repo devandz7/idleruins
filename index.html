@@ -115,7 +115,7 @@
 				<div class="mainTabContent" id="mainTabLogs">
 					<h4>Logs</h4>
 					<div class="logs" id="logs">
-						Welcome to Idle Ruins v0.1!
+						Welcome to Idle Ruins v0.1.1!
 					</div>
 					<button class="button_blue" onclick="">Clear Logs</button>
 				</div>
@@ -170,6 +170,20 @@
 								<button id="btnGatherMushroomPatch" class="button_blue" onclick="btnGatherMushroomPatch()">Gather</button>
 							</div>
 						</div>
+						<div class="floater_content" id="giant_rat_nest">
+							<div class="floater_cell">
+								<image src="img/giant_rat_nest.png" width="75px" height="75px"></image>
+								<h4>Giant Rat Nest</h4>
+								<div id="giant_rat_nest_text">
+									<p>Massive rats are all over this particular area.</p>
+								</div>
+								<div id="giant_rat_nest_progress" style="display: none; margin-bottom: 20px;">
+									<p>Fighting Giant Rat...</p>
+									<div class="enemyBar" id="giantRatNestBar"><div class="enemyBarText" id="giantRatNestBarText">0%</div><div class="enemyBarInner" id="giantRatNestBarInner"></div></div>
+								</div>
+								<button id="btnFightGiantRatNest" class="button_blue" onclick="btnFightGiantRatNest()">Fight</button>
+							</div>
+						</div>
 						<div class="floater_content" id="whispering_hollow">
 							<div class="floater_cell">
 								<image src="img/whispering_hollow.png" width="75px" height="75px"></image>
@@ -190,20 +204,6 @@
 								<h4>Abandoned Camp</h4>
 								<p>This camp has been abandoned by the previous adventurer. There could be something valuable left behind.</p>
 								<button class="button_blue" onclick="lootNode(0)">Loot</button>
-							</div>
-						</div>
-						<div class="floater_content" id="giant_rat_nest">
-							<div class="floater_cell">
-								<image src="img/giant_rat_nest.png" width="75px" height="75px"></image>
-								<h4>Giant Rat Nest</h4>
-								<div id="giant_rat_nest_text">
-									<p>Massive rats are all over this particular area.</p>
-								</div>
-								<div id="giant_rat_nest_progress" style="display: none; margin-bottom: 20px;">
-									<p>Fighting Giant Rat...</p>
-									<div class="enemyBar" id="giantRatNestBar"><div class="enemyBarText" id="giantRatNestBarText">0%</div><div class="enemyBarInner" id="giantRatNestBarInner"></div></div>
-								</div>
-								<button id="btnFightGiantRatNest" class="button_blue" onclick="btnFightGiantRatNest()">Fight</button>
 							</div>
 						</div>
 						<div class="floater_content" id="glowing_butterflies">
@@ -352,6 +352,11 @@
 							<li>2 Artifacts.</li>
 							<li>1 Food item.</li>
 						</ul>
+						Version 0.1.1 - 07/02/2026
+						<ul>
+							<li>Floor 1 & 2 Exploration XP rebalancing.</li>
+							<li>Bug fixes: Prevent chests and loot nodes from appearing early.</li>
+						</ul>
 					<h4>Future Updates</h4>
 					<ul>
 						<li>Floor 3 & Floor 4.</li>
@@ -364,14 +369,14 @@
 				<div class="modal-content">
 					<span onclick="modalAboutClose()" class="close">&times;</span>
 					<h2>About</h2>
-					<h4>Idle Ruins v0.1</h4>
+					<h4>Idle Ruins v0.1.1</h4>
 					<p>Made by Devandz</p>
 					<p>Thanks for playing!</p>
 				</div>
 			</div>
 		</section>
 		<footer>
-			<p>Idle Ruins v0.1 - Devandz</p>
+			<p>Idle Ruins v0.1.1 - Devandz</p>
 		</footer>
 	</body>
 </html>
@@ -398,8 +403,8 @@
 	let p1xp = 0; // Bonus EXP from perks
 
 	// Floors
-	let floor1maxexp = 3500;
-	let floor2maxexp = 5000;
+	let floor1maxexp = 1000;
+	let floor2maxexp = 2000;
 	let currentFloor = 0;
 	var floorStatus = [1, 0];
 
@@ -431,7 +436,7 @@
 	var lootChestStatus = [0, 0];
 	var lootNodeStatus = [0, 0];
 
-	let logs = ["Welcome to Idle Ruins 0.1!"];
+	let logs = ["Welcome to Idle Ruins 0.1.1!"];
 
 	// On Load
 
@@ -807,28 +812,28 @@
 		if (xp >= 50){
 			level = 2;
 		}
-		if (xp >= 125){
+		else if (xp >= 125){
 			level = 3;
 		}
-		if (xp >= 313){
+		else if (xp >= 313){
 			level = 4;
 		}
-		if (xp >= 783){
+		else if (xp >= 783){
 			level = 5;
 		}
-		if (xp >= 1958){
+		else if (xp >= 1958){
 			level = 6;
 		}
-		if (xp >= 4895){
+		else if (xp >= 4895){
 			level = 7;
 		}
-		if (xp >= 12238){
+		else if (xp >= 12238){
 			level = 8;
 		}
-		if (xp >= 30595){
+		else if (xp >= 30595){
 			level = 9;
 		}
-		if (xp >= 76488){
+		else if (xp >= 76488){
 			level = 10;
 		}
 		//if (xp >= 150000){
@@ -841,31 +846,32 @@
 	function getNextLevelXP(xp){
 		let nxp = 0;
 		// Calculate XP required for next level
+		nxp = 50;
 		if (xp >= 50){
 			nxp = 125;
 		}
-		if (xp >= 125){
+		else if (xp >= 125){
 			nxp = 313;
 		}
-		if (xp >= 313){
+		else if (xp >= 313){
 			nxp = 783;
 		}
-		if (xp >= 783){
+		else if (xp >= 783){
 			nxp = 1958;
 		}
-		if (xp >= 1958){
+		else if (xp >= 1958){
 			nxp = 4895;
 		}
-		if (xp >= 4895){
+		else if (xp >= 4895){
 			nxp = 12238;
 		}
-		if (xp >= 12238){
+		else if (xp >= 12238){
 			nxp = 30595;
 		}
-		if (xp >= 30595){
+		else if (xp >= 30595){
 			nxp = 76488;
 		}
-		if (xp >= 76488){
+		else if (xp >= 76488){
 			nxp = 76488;
 		}
 
